@@ -1,0 +1,52 @@
+<ng-container *ngIf="dataAvailable; else elseTemplate">
+  <mat-card>
+    <mat-card-header fxLayout="row" fxFlexAlign="center">
+      <mat-card-title class="questionTitle" [routerLink]="[ '/questions', question.Id ]">{{question.Id}}
+      </mat-card-title>
+      <mat-chip-list class="secondary-header">
+        <mat-chip (click)="upvoteEntity(question)" color="primary" selected>Upvote:
+          {{question.upvotes ? question.upvotes : 0}}</mat-chip>
+        <mat-chip (click)="downvoteEntity(question)" color="accent" selected>Downvote:
+          {{question.downvotes ? question.downvotes : 0}}</mat-chip>
+      </mat-chip-list>
+    </mat-card-header>
+    <mat-card-content>
+      <div innerHtml="{{question.Text}}"></div>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="openNewAnswerDialog()">New Answer</button>
+      </mat-card-actions>
+      <ng-container *ngIf="question.answers && question.answers.length; else noAnswers">
+        <h2>Answers:</h2>
+        <mat-list *ngFor="let answer of question.answers">
+          <mat-card>
+            <mat-card-header fxLayout="row" fxFlexAlign="center">
+              <img mat-card-avatar
+                src="{{answer.created_by && answer.created_by.Avatar ? answer.created_by.Avatar: 'https://avatars1.githubusercontent.com/u/1319027?s=460&v=4'}}">
+              <mat-card-title>
+                {{answer.created_by && answer.created_by.Name ? answer.created_by.Name+' '+answer.created_by.Surname: 'Anonymous'}}
+              </mat-card-title>
+              <mat-card-subtitle>
+                {{answer.created_at ? answer.created_at : 'Not known'}}
+              </mat-card-subtitle>
+              <mat-chip-list class="secondary-header">
+                <mat-chip (click)="upvoteEntity(answer)" color="primary" selected>Upvote:
+                  {{answer.upvotes ? answer.upvotes : 0}}</mat-chip>
+                <mat-chip (click)="downvoteEntity(answer)" color="accent" selected>Downvote:
+                  {{answer.downvotes ? answer.downvotes : 0}}</mat-chip>
+              </mat-chip-list>
+            </mat-card-header>
+            <mat-card-content>
+              <div innerHtml="{{answer.Answer}}"></div>
+            </mat-card-content>
+          </mat-card>
+        </mat-list>
+      </ng-container>
+      <ng-template #noAnswers>
+        <h3>No Answers yet</h3>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+<ng-template #elseTemplate>
+  <p>Loading data....</p>
+</ng-template>

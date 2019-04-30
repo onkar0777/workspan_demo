@@ -1,0 +1,12 @@
+.app-container {
+  padding: 1rem;
+  margin: 0;
+}
+
+.app-header {
+  margin-bottom: 1rem;
+
+  & h1 {
+    color: gray;
+  }
+}

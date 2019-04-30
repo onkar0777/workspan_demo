@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Submit New Answer for {{data.questionId}}</h1>
+<div mat-dialog-content fxLayout="column">
+  <mat-form-field>
+    <input type="url" matInput placeholder="Your Avatar Url" [(ngModel)]="data.answer.created_by.Avatar">
+  </mat-form-field>
+  <div fxLayout="row" fxLayoutGap="1rem">
+    <mat-form-field>
+      <input type="text" matInput placeholder="Your Name" [(ngModel)]="data.answer.created_by.Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Surname" [(ngModel)]="data.answer.created_by.Surname">
+    </mat-form-field>
+  </div>
+  <mat-form-field>
+    <textarea required matInput placeholder="Answer Text" [(ngModel)]="data.answer.Answer"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">No Thanks</button>
+  <button color="primary" [disabled]="!(data.answer.Answer && data.answer.Answer.length > 0)" mat-raised-button
+    [mat-dialog-close]="data.answer">Ok</button>
+</div>

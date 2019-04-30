@@ -1,0 +1,11 @@
+.secondary-header {
+  margin-left: auto;
+
+  & mat-chip:hover {
+    cursor: pointer;
+  }
+}
+
+.questionTitle:hover {
+  cursor: pointer;
+}

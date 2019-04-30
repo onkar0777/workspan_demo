@@ -1,0 +1,8 @@
+<ng-container *ngIf="dataAvailable; else elseTemplate">
+  <mat-list *ngFor="let question of feedQuestions">
+    <app-question [question]='question'></app-question>
+  </mat-list>
+</ng-container>
+<ng-template #elseTemplate>
+  <p>Loading data...</p>
+</ng-template>
